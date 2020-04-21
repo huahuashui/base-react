@@ -1,7 +1,7 @@
 import React from "react";
 import {RouteComponentProps} from "base-react/node_modules/@types/react-router";
 
-export default class Page1 extends React.Component<RouteComponentProps> {
+export default class Detail extends React.Component<RouteComponentProps> {
 
     constructor(props: RouteComponentProps) {
         super(props)
@@ -9,9 +9,7 @@ export default class Page1 extends React.Component<RouteComponentProps> {
 
     public render() {
         return (
-            <div>
-                <p>page1</p>
-            </div>
+            <div>Detail</div>
         );
     }
 }
