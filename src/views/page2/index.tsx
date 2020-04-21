@@ -1,9 +1,29 @@
 import React from "react";
+import {Link, Route, RouteComponentProps} from "react-router-dom";
 
-export default class Page2 extends React.Component<{}, {}> {
+import Detail from "./detail";
+
+export default class Page2 extends React.Component<RouteComponentProps> {
+
+    constructor(props: RouteComponentProps) {
+        super(props)
+    }
+
+    componentDidMount() {
+        console.log(111, this.props);
+    };
+
+    componentWillReceiveProps() {
+        console.log(222, this.props);
+    }
+
     public render() {
         return (
-            <div>Page2</div>
+            <div>
+                Page2
+                <li><Link to="/page2/detail">detail</Link></li>
+                <Route exact path="/page2/detail" component={Detail}></Route>
+            </div>
         );
     }
 }
