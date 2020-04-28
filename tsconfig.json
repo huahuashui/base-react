@@ -23,11 +23,11 @@
         "pretty": true,
         "jsx": "react",
         //        "jsxFactory": "h",
-        "baseUrl": ".",
-        "paths": {
-            "base-react/*": [
-                "./*"
-            ]
-        }
+        "baseUrl": "."
+        //        "paths": {
+        //            "base-react/*": [
+        //                "./*"
+        //            ]
+        //        }
     }
 }

@@ -3,10 +3,11 @@ import {RouteComponentProps, RouteProps, withRouter, Link, Route, Switch, Browse
 
 import Page1 from "./views/page1";
 import Page2 from "./views/page2";
+import {ReactNode} from "base-react/node_modules/@types/react";
 
-export default class App extends React.Component<{}, {}> {
+export default class App extends React.Component<{}, {}, any> {
 
-    public render() {
+    public render(): ReactNode {
         return (
             <BrowserRouter>
                 <ul>
@@ -21,4 +22,10 @@ export default class App extends React.Component<{}, {}> {
             </BrowserRouter>
         )
     }
+
+    public componentDidMount(): void {
+
+    }
+
+    public componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {}
 }
