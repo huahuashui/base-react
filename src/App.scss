@@ -1,0 +1,35 @@
+html, body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.g-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+    text-align: center;
+    line-height: 30px;
+    background-color: gray;
+
+    .menu-item {
+        color: #303133;
+        background-color: #3fa9fe;
+
+        &.is-active {
+            background-color: #67c23a;
+
+        }
+    }
+}
+
+.g-main {
+    position: absolute;
+    top: 0;
+    left: 160px;
+    right: 0;
+    bottom: 0;
+    padding-left: 12px;
+}

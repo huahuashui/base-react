@@ -1,4 +1,4 @@
-import {IRouteConfig, routeConfig} from "./index";
+import {IRouteConfig, routeConfig} from "./routeConfig";
 
 export const routeService = {
 

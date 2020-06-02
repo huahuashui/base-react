@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter, Link, Redirect, Route, RouteComponentProps, Switch} from "react-router-dom";
 
 import {routeService} from "../../routes/routeService";
-import {IRouteConfig} from "../../routes";
+import {IRouteConfig} from "../../routes/routeConfig";
 
 export default class Page2 extends React.Component<RouteComponentProps> {
 

@@ -1,35 +1,62 @@
 import React from "react";
-import {Link, Route, Switch, BrowserRouter, Redirect} from "react-router-dom";
+import {Link, Route, Switch, Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import "./App.scss";
+import "./reset.scss";
 
 import {routeService} from "./routes/routeService";
-import {IRouteConfig} from "./routes";
+import {IRouteConfig} from "./routes/routeConfig";
 
-export default class App extends React.Component<{}, {}, any> {
+interface IProps extends RouteComponentProps {
 
-    constructor(props: Readonly<{}>) {
+}
+
+interface IState {
+    // currentRoute: string;
+}
+
+class App extends React.Component<IProps, IState> {
+
+    constructor(props: Readonly<IProps>) {
         super(props);
+
+        this.state = {
+
+        };
     }
 
     public render() {
+        const currentRoute = '/' + this.props.location.pathname.split('/').filter(item => !!item)[0];
+
+        console.error('currentRoute', this.props.location.pathname);
+
         const routeConfig: IRouteConfig[] = routeService.getRouteByPath();
+
         return (
-            <BrowserRouter basename="/">
-                <ul>
+            <div>
+                <ul className="g-menu">
                     {
                         routeConfig.map(item => {
-                            return <li key={item.key}><Link to={item.path}>{item.moduleName}</Link></li>
+                            const activeClass = currentRoute === item.path ? 'is-active' : null;
+                            return (
+                                <li className={'menu-item ' + activeClass}
+                                    key={item.key}>
+                                    <Link to={item.path}>{item.moduleName}</Link>
+                                </li>
+                            )
                         })
                     }
                 </ul>
                 <Redirect from="/" to={routeConfig[0].path}></Redirect>
-                <Switch>
-                    {
-                        routeConfig.map(item => {
-                            return <Route key={item.key} path={item.path} component={item.component}></Route>
-                        })
-                    }
-                </Switch>
-            </BrowserRouter>
+                <div className="g-main">
+                    <Switch>
+                        {
+                            routeConfig.map(item => {
+                                return <Route key={item.key} path={item.path} component={item.component}></Route>
+                            })
+                        }
+                    </Switch>
+                </div>
+            </div>
         )
     }
 
@@ -39,3 +66,5 @@ export default class App extends React.Component<{}, {}, any> {
     // 此生命周期在后代组件抛出错误后被调用
     public componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {}
 }
+
+export default withRouter(App);
