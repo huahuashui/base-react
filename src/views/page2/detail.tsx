@@ -1,5 +1,5 @@
 import React from "react";
-import {RouteComponentProps} from "base-react/node_modules/@types/react-router";
+import {RouteComponentProps} from "react-router";
 
 export default class Detail extends React.Component<RouteComponentProps> {
 

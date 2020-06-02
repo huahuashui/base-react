@@ -1,31 +1,41 @@
 import React from "react";
-import {RouteComponentProps, RouteProps, withRouter, Link, Route, Switch, BrowserRouter} from "react-router-dom";
+import {Link, Route, Switch, BrowserRouter, Redirect} from "react-router-dom";
 
-import Page1 from "./views/page1";
-import Page2 from "./views/page2";
-import {ReactNode} from "base-react/node_modules/@types/react";
+import {routeService} from "./routes/routeService";
+import {IRouteConfig} from "./routes";
 
 export default class App extends React.Component<{}, {}, any> {
 
-    public render(): ReactNode {
+    constructor(props: Readonly<{}>) {
+        super(props);
+    }
+
+    public render() {
+        const routeConfig: IRouteConfig[] = routeService.getRouteByPath();
         return (
-            <BrowserRouter>
+            <BrowserRouter basename="/">
                 <ul>
-                    <li><Link to="/page1">page1</Link></li>
-                    <li><Link to="/page2">page2</Link></li>
-                    <li><Link to="/page2/detail">page2</Link></li>
+                    {
+                        routeConfig.map(item => {
+                            return <li key={item.key}><Link to={item.path}>{item.moduleName}</Link></li>
+                        })
+                    }
                 </ul>
+                <Redirect from="/" to={routeConfig[0].path}></Redirect>
                 <Switch>
-                    <Route path="/page1" component={Page1}></Route>
-                    <Route path="/page2" component={Page2}></Route>
+                    {
+                        routeConfig.map(item => {
+                            return <Route key={item.key} path={item.path} component={item.component}></Route>
+                        })
+                    }
                 </Switch>
             </BrowserRouter>
         )
     }
 
-    public componentDidMount(): void {
+    // 在最近一次渲染输出（提交到 DOM 节点）之前调用
+    // public getSnapshotBeforeUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>): any | null {}
 
-    }
-
+    // 此生命周期在后代组件抛出错误后被调用
     public componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {}
 }

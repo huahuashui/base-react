@@ -1,7 +1,8 @@
 import React from "react";
-import {Link, Route, RouteComponentProps} from "react-router-dom";
+import {BrowserRouter, Link, Redirect, Route, RouteComponentProps, Switch} from "react-router-dom";
 
-import Detail from "./detail";
+import {routeService} from "../../routes/routeService";
+import {IRouteConfig} from "../../routes";
 
 export default class Page2 extends React.Component<RouteComponentProps> {
 
@@ -18,10 +19,24 @@ export default class Page2 extends React.Component<RouteComponentProps> {
     }
 
     public render() {
+        let routeConfig: IRouteConfig[] = routeService.getRouteByPath('page2');
         return (
             <div>
                 Page2
-                <Route path="/page2/detail" component={Detail}></Route>
+                <ul>
+                    {
+                        routeConfig.map(item => {
+                            return <li key={item.key}><Link to={item.path}>{item.moduleName}</Link></li>
+                        })
+                    }
+                </ul>
+                <Switch>
+                    {
+                        routeConfig.map(item => {
+                            return <Route key={item.key} path={item.path} component={item.component}></Route>
+                        })
+                    }
+                </Switch>
             </div>
         );
     }
