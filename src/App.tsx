@@ -2,6 +2,8 @@ import React from "react";
 import {Link, Route, Switch, Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import "./App.scss";
 import "./reset.scss";
+import "./components/theme-chalk/src/common/icon-16.scss";
+import "./components/theme-chalk/src/common/transition.scss";
 
 import {routeService} from "./routes/routeService";
 import {IRouteConfig} from "./routes/routeConfig";

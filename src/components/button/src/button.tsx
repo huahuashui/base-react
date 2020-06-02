@@ -42,7 +42,7 @@ export default class SnButton extends React.Component<ISnButtonProps, ISnButtonS
                     autoFocus={autofocus}
                     type={nativeType}
                     onClick={handleClick}>
-                {icon && <i className={'n-button__icon ' + icon}></i>}
+                {icon && <i className={'sn-button__icon ' + icon}></i>}
                 {children &&
                 <span className={'sn-button__text ' + (icon ? 'is-margin' : '')}>{this.props.children}</span>}
             </button>
