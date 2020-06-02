@@ -13,11 +13,11 @@ export default class Page2 extends React.Component<RouteComponentProps> {
     }
 
     componentDidMount() {
-        console.log(111, this.props);
+        console.log('componentDidMount', this.props);
     };
 
     componentWillReceiveProps() {
-        console.log(222, this.props);
+        console.log('componentWillReceiveProps', this.props);
     }
 
     public render() {
@@ -30,7 +30,7 @@ export default class Page2 extends React.Component<RouteComponentProps> {
                 <SnButton type="primary">
                     {
                         routeConfig.map(item => {
-                            return <li key={item.key}><Link to={item.path}>{item.moduleName}</Link></li>
+                            return <div key={item.key}><Link to={item.path}>{item.moduleName}</Link></div>
                         })
                     }
                 </SnButton>

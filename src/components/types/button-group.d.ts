@@ -1,5 +1,9 @@
-import {SnUIComponent} from './component';
+import {SnUIComponentProps} from "./component";
 
-/** Button Group Component */
-export declare interface SnButtonGroup extends SnUIComponent {
+export interface ISnButtonGroupProps extends SnUIComponentProps {
+
+}
+
+export interface ISnButtonGroupState {
+
 }

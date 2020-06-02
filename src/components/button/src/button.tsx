@@ -1,16 +1,19 @@
 import React, {SyntheticEvent} from "react";
 import {SnUIComponentSizeEnum} from "../../enum/component";
-import {ISnButtonProps, ISnButtonState} from "../../types/button";
+import {ButtonType, ISnButtonProps, ISnButtonState} from "../../types/button";
 
 
 export default class SnButton extends React.Component<ISnButtonProps, ISnButtonState> {
 
     // 赋默认值
     public static defaultProps: Partial<ISnButtonProps> = {
-        type: null,
+        style: null,
+        className: '',
+
+        type: '' as ButtonType,
         nativeType: "button",
         size: 'small',
-        icon: null,
+        icon: '',
         disabled: false,
         plain: false,
         autofocus: false,
@@ -66,7 +69,8 @@ export default class SnButton extends React.Component<ISnButtonProps, ISnButtonS
             props: {
                 type,
                 disabled,
-                plain
+                plain,
+                className
             }
         } = this;
 
@@ -74,6 +78,6 @@ export default class SnButton extends React.Component<ISnButtonProps, ISnButtonS
         const disabledC = disabled ? 'is-disabled' : '';
         const plainC = plain ? 'is-plain' : '';
 
-        return ['sn-button', typeC, disabledC, plainC].join(' ');
+        return ['sn-button', className, typeC, disabledC, plainC].join(' ').trim();
     }
 }

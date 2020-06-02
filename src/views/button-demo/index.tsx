@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ActionType} from "../../redux/action-type";
 
 import SnButton from "../../components/button";
+import SnButtonGroup from "../../components/button/src/button-group";
 
 class ButtonDemo extends React.Component<Record<string, any>, {}> {
 
@@ -68,27 +68,27 @@ class ButtonDemo extends React.Component<Record<string, any>, {}> {
                     <SnButton type="text" icon="sn-input-clear"></SnButton>
                 </div>
                 <div style={{marginTop: '10px'}}>
-                    {/*按钮组*/}
-                    {/*<SnButtonGroup>*/}
-                    {/*    <SnButton type="primary">按钮1</SnButton>*/}
-                    {/*    <SnButton type="primary">按钮2</SnButton>*/}
-                    {/*    <SnButton type="primary">按钮3</SnButton>*/}
-                    {/*</SnButtonGroup>*/}
-                    {/*<SnButtonGroup class="m-top10">*/}
-                    {/*    <SnButton type="success">按钮1</SnButton>*/}
-                    {/*    <SnButton type="success">按钮2</SnButton>*/}
-                    {/*    <SnButton type="success">按钮3</SnButton>*/}
-                    {/*</SnButtonGroup>*/}
-                    {/*<SnButtonGroup class="m-top10">*/}
-                    {/*    <SnButton>按钮1</SnButton>*/}
-                    {/*    <SnButton>按钮2</SnButton>*/}
-                    {/*    <SnButton>按钮3</SnButton>*/}
-                    {/*</SnButtonGroup>*/}
-                    {/*<SnButtonGroup class="m-top10">*/}
-                    {/*    <SnButton type="text">按钮1</SnButton>*/}
-                    {/*    <SnButton type="text">按钮2</SnButton>*/}
-                    {/*    <SnButton type="text">按钮3</SnButton>*/}
-                    {/*</SnButtonGroup>*/}
+                    按钮组
+                    <SnButtonGroup>
+                        <SnButton type="primary">按钮1</SnButton>
+                        <SnButton type="primary">按钮2</SnButton>
+                        <SnButton type="primary">按钮3</SnButton>
+                    </SnButtonGroup>
+                    <SnButtonGroup style={{marginTop: '10px'}}>
+                        <SnButton type="success">按钮1</SnButton>
+                        <SnButton type="success">按钮2</SnButton>
+                        <SnButton type="success">按钮3</SnButton>
+                    </SnButtonGroup>
+                    <SnButtonGroup style={{marginTop: '10px'}}>
+                        <SnButton>按钮1</SnButton>
+                        <SnButton>按钮2</SnButton>
+                        <SnButton>按钮3</SnButton>
+                    </SnButtonGroup>
+                    <SnButtonGroup style={{marginTop: '10px'}}>
+                        <SnButton type="text">按钮1</SnButton>
+                        <SnButton type="text">按钮2</SnButton>
+                        <SnButton type="text">按钮3</SnButton>
+                    </SnButtonGroup>
                 </div>
                 <div style={{marginTop: '10px'}}>
                     不同尺寸

@@ -1,4 +1,4 @@
-import {SnUIComponentSize} from './component';
+import {SnUIComponentProps, SnUIComponentSize} from './component';
 import {SyntheticEvent} from "react";
 
 /** 类型 */
@@ -7,7 +7,7 @@ export type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'info' |
 /** 原生type属性 */
 export type ButtonNativeType = 'button' | 'submit' | 'reset';
 
-export interface ISnButtonProps {
+export interface ISnButtonProps extends SnUIComponentProps {
     /** 类型 */
     type: ButtonType;
 
