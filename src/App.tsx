@@ -27,7 +27,7 @@ class App extends React.Component<IProps, IState> {
     public render() {
         const currentRoute = '/' + this.props.location.pathname.split('/').filter(item => !!item)[0];
 
-        console.error('currentRoute', this.props.location.pathname);
+
 
         const routeConfig: IRouteConfig[] = routeService.getRouteByPath();
 

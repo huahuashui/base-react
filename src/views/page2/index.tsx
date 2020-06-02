@@ -1,8 +1,10 @@
 import React from "react";
-import {BrowserRouter, Link, Redirect, Route, RouteComponentProps, Switch} from "react-router-dom";
+import {Link, Route, RouteComponentProps, Switch} from "react-router-dom";
 
 import {routeService} from "../../routes/routeService";
 import {IRouteConfig} from "../../routes/routeConfig";
+
+import SnButton from "../../components/button";
 
 export default class Page2 extends React.Component<RouteComponentProps> {
 
@@ -22,21 +24,26 @@ export default class Page2 extends React.Component<RouteComponentProps> {
         let routeConfig: IRouteConfig[] = routeService.getRouteByPath('page2');
         return (
             <div>
-                Page2
-                <ul>
+                <div>
+                    Page2视口
+                </div>
+                <SnButton type="primary">
                     {
                         routeConfig.map(item => {
                             return <li key={item.key}><Link to={item.path}>{item.moduleName}</Link></li>
                         })
                     }
-                </ul>
-                <Switch>
-                    {
-                        routeConfig.map(item => {
-                            return <Route key={item.key} path={item.path} component={item.component}></Route>
-                        })
-                    }
-                </Switch>
+                </SnButton>
+
+                <div>
+                    <Switch>
+                        {
+                            routeConfig.map(item => {
+                                return <Route key={item.key} path={item.path} component={item.component}></Route>
+                            })
+                        }
+                    </Switch>
+                </div>
             </div>
         );
     }

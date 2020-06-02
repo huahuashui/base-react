@@ -1,8 +1,9 @@
 import React, {Ref, RefObject} from "react";
 import {connect} from "react-redux";
 import {ActionType} from "../../redux/action-type";
+import {RouteComponentProps} from "react-router";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
     count: number;
     dispatch: any
 }
@@ -34,6 +35,8 @@ class Page1 extends React.Component<Readonly<IProps>, Readonly<IState>> {
     }
 
     public render() {
+        console.error('currentRoute', this.props.location.pathname);
+
         return (
             <div className="page1" ref={this.pageRef}>
                 <p>page1</p>
