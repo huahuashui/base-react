@@ -6,26 +6,42 @@ import {IRouteConfig} from "../../routes/routeConfig";
 
 import SnButton from "../../components/button";
 
-export default class Page2 extends React.Component<RouteComponentProps> {
+interface IProps extends RouteComponentProps {
+    count: number;
+}
 
-    constructor(props: RouteComponentProps) {
-        super(props)
+interface IState {
+    count: number;
+}
+
+export default class Page2 extends React.Component<IProps, IState> {
+
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            count: this.props.count ? this.props.count : 0
+        }
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         console.log('componentDidMount', this.props);
     };
 
-    componentWillReceiveProps() {
+    public componentWillReceiveProps() {
         console.log('componentWillReceiveProps', this.props);
     }
 
     public render() {
-        let routeConfig: IRouteConfig[] = routeService.getRouteByPath('page2');
+        let routeConfig: IRouteConfig[] = routeService.getRouteByPath('RouteDemo');
         return (
             <div>
                 <div>
                     Page2视口
+
+                    <SnButton onClick={() => this.setState(() => {return {count: this.state.count + 1}})}>+</SnButton>
+                    <span>{this.state.count}</span>
+                    <SnButton onClick={() => this.setState(() => {return {count: this.state.count - 1}})}>-</SnButton>
                 </div>
                 <SnButton type="primary">
                     {

@@ -18,7 +18,7 @@ interface IState {
 
 class App extends React.Component<IProps, IState> {
 
-    constructor(props: Readonly<IProps>) {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {

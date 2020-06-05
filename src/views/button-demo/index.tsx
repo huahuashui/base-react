@@ -1,10 +1,9 @@
 import React from "react";
-import {connect} from "react-redux";
 
 import SnButton from "../../components/button";
 import SnButtonGroup from "../../components/button/src/button-group";
 
-class ButtonDemo extends React.Component<Record<string, any>, {}> {
+export default class ButtonDemo extends React.Component<Record<string, any>, {}> {
 
     constructor(props: Record<string, any>) {
         super(props)
@@ -102,9 +101,3 @@ class ButtonDemo extends React.Component<Record<string, any>, {}> {
         );
     }
 }
-
-function mapStateToProps(state: any) {
-    return {};
-}
-
-export default connect(mapStateToProps)(ButtonDemo);
