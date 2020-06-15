@@ -43,7 +43,7 @@ export default class SnFormItem extends React.Component<ISnFormItemProps, ISnFor
         super(props);
     }
 
-    render() {
+    public render() {
         console.log('props', this.props);
         const formItemClass = [
             'sn-form-item',
@@ -60,5 +60,36 @@ export default class SnFormItem extends React.Component<ISnFormItemProps, ISnFor
 
     public componentDidMount(): void {
         console.log('componentDidMount', this)
+    }
+
+    public buble(arr: any[] = []): any[] {
+        if (Array.isArray(arr) && arr.length) {
+            // 冒泡排序
+            // let len = arr.length - 1;
+            //
+            // for (let i = len; i > 0; i--) {
+            //     for (let j = 0; j < i; j++) {
+            //         if (arr[j] > arr[j + 1]) {
+            //             [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+            //         }
+            //     }
+            // }
+
+
+            // 选择排序
+            const len = arr.length;
+
+            for (let i = 0; i < len - 1; i++) {
+                let min = i;
+
+                for (let j = i + 1; j < len; j++) {
+                    min = arr[min] > arr[j] ? j : min;
+                }
+
+                [arr[min], arr[i]] = [arr[i], arr[min]];
+            }
+        }
+
+        return arr;
     }
 }

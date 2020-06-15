@@ -33,7 +33,7 @@ export default class Page2 extends React.Component<IProps, IState> {
     }
 
     public render() {
-        let routeConfig: IRouteConfig[] = routeService.getRouteByPath('RouteDemo');
+        const routeConfig: IRouteConfig[] = routeService.getRouteByPath('RouteDemo');
         return (
             <div>
                 <div>

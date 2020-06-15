@@ -8,16 +8,16 @@ interface ISnFormItem {
 
 export default class SnForm extends React.Component<ISnFormProps, ISnFormState> {
 
-    static childContextTypes = {
+    public static childContextTypes = {
         SnForm: PropTypes.any
     };
 
-    static propTypes = {
+    public static propTypes = {
 
     };
 
     // 赋默认值
-    static defaultProps: Partial<ISnFormProps> = {
+    public static defaultProps: Partial<ISnFormProps> = {
         inline: false,
         labelPosition: "right",
         labelWidth: '',

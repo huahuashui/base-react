@@ -8,7 +8,6 @@ const PostcssImport = require("postcss-import");
 const Autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HappyPack = require('happypack');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // 文件打包公共配置项
@@ -18,7 +17,7 @@ const tsConfig = require.resolve('../tsconfig.json');
 module.exports = {
     mode: 'production',
     entry: {
-        app: './src/main.ts',
+        app: './src/main.tsx',
     },
     output: {
         path: path.resolve(process.cwd(), './dist'),
@@ -28,9 +27,7 @@ module.exports = {
     },
     resolve: {
         extensions: ['.json', '.js', '.ts', '.tsx'],
-        alias: {
-            ...config.alias,
-        },
+        alias: config.alias
 
     },
     optimization: {
@@ -66,12 +63,6 @@ module.exports = {
                 },
             }
         }
-    },
-    performance: {
-        hints: false
-    },
-    stats: {
-        children: false
     },
     module: {
         rules: [
@@ -130,7 +121,9 @@ module.exports = {
                     loader: 'tslint-loader',
                     options: {
                         // tslint错误默认显示为警告
-                        emitErrors: true
+                        emitErrors: true,
+                        // 默认情况下，tslint不会中断编译
+                        failOnHint: false,
                     }
                 }
             ]
@@ -139,7 +132,6 @@ module.exports = {
             id: 'ts-pack',
             threads: 2,
             use: [
-                'babel-loader',
                 {
                     loader: 'ts-loader',
                     options: {
@@ -151,12 +143,6 @@ module.exports = {
             ]
         }),
         /**** end *****/
-        new ForkTsCheckerWebpackPlugin({
-            vue: true,
-            tslint: true,
-            checkSyntacticErrors: true,
-            tsconfig: tsConfig
-        }),
         new webpack.DefinePlugin({
             'process.env.FAAS_ENV': JSON.stringify(process.env.FAAS_ENV)
         }),
@@ -167,7 +153,8 @@ module.exports = {
             template: './src/index.html',
             filename: './index.html',
             favicon: './src/favicon.ico',
-            minify: { // 压缩HTML代码的配置
+            // 压缩HTML代码的配置
+            minify: {
                 minifyCSS: true,
                 minifyJS: true,
                 collapseWhitespace: true

@@ -7,7 +7,6 @@ const PostcssImport = require("postcss-import");
 const Autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HappyPack = require('happypack');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = require('./config');
@@ -26,7 +25,7 @@ module.exports = {
     },
     resolve: {
         extensions: ['.json', '.js', '.ts', '.tsx'],
-        alias: config.alias,
+        alias: config.alias
     },
     devServer: {
         publicPath: '/',
@@ -51,12 +50,6 @@ module.exports = {
         ],
         runtimeChunk: true,
     },
-    performance: {
-        hints: false
-    },
-    stats: {
-        children: false
-    },
     module: {
         rules: [
             {
@@ -64,25 +57,16 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ['babel-loader']
             },
-            // {
-            //     test: /\.tsx?$/,
-            //     exclude: /node_modules/,
-            //     use: [
-            //         {
-            //             loader: 'tslint-loader',
-            //             options: {
-            //                 // tslint错误默认显示为警告
-            //                 emitErrors: false,
-            //                 // 默认情况下，tslint不会中断编译
-            //                 failOnHint: false,
-            //             }
-            //         }
-            //     ]
-            // },
+            {
+                test: /\.tsx?/,
+                exclude: /node_modules/,
+                enforce: 'pre',
+                use: ['happypack/loader?id=ts-lint-pack']
+            },
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                use: ["ts-loader"]
+                use: ['happypack/loader?id=ts-pack']
             },
             {
                 test: /\.(scss|css)$/,
@@ -132,45 +116,36 @@ module.exports = {
     },
     plugins: [
         /**** 使用HappyPack实例化 *****/
-        // new HappyPack({
-        //     id: 'ts-lint-pack',
-        //     threads: 2,
-        //     use: [
-        //         {
-        //             loader: 'vue-tslint-loader',
-        //             options: {
-        //                 // tslint错误默认显示为警告
-        //                 emitErrors: false,
-        //                 // 默认情况下，tslint不会中断编译
-        //                 failOnHint: false,
-        //             }
-        //         }
-        //     ]
-        // }),
-        // new HappyPack({
-        //     id: 'ts-pack',
-        //     threads: 2,
-        //     use: [
-        //         'babel-loader',
-        //         {
-        //             loader: 'ts-loader',
-        //             options: {
-        //                 happyPackMode: true,
-        //                 transpileOnly: true,
-        //                 appendTsSuffixTo: [/\.vue$/],
-        //                 appendTsxSuffixTo: [/\.vue$/],
-        //                 configFile: tsConfig,
-        //             }
-        //         }
-        //     ]
-        // }),
-        /**** end *****/
-        new ForkTsCheckerWebpackPlugin({
-            vue: true,
-            tslint: true,
-            checkSyntacticErrors: true,
-            tsconfig: tsConfig,
+        new HappyPack({
+            id: 'ts-lint-pack',
+            threads: 2,
+            use: [
+                {
+                    loader: 'tslint-loader',
+                    options: {
+                        // tslint错误默认显示为警告
+                        emitErrors: true,
+                        // 默认情况下，tslint不会中断编译
+                        failOnHint: false,
+                    }
+                }
+            ]
         }),
+        new HappyPack({
+            id: 'ts-pack',
+            threads: 2,
+            use: [
+                {
+                    loader: 'ts-loader',
+                    options: {
+                        happyPackMode: true,
+                        transpileOnly: true,
+                        configFile: tsConfig,
+                    }
+                }
+            ]
+        }),
+        /**** end *****/
         new webpack.DefinePlugin({
             'process.env.FAAS_ENV': JSON.stringify(process.env.FAAS_ENV)
         }),

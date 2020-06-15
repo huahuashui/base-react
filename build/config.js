@@ -28,21 +28,24 @@ function removeFileSuffix(file) {
     return file.split('.')[0];
 }
 
-// 分离的公共部分-打包入口配置
+// 排除依赖
+// 防止将某些 import 的包打包到 bundle 中，
+// 而是在运行时(runtime)再去从外部获取这些扩展依赖
 const externals = {
-    react: {
-        root: 'react',
-        commonjs: 'react',
-        commonjs2: 'react',
-        amd: 'react'
-    }
+    // react: {
+    //     root: 'react',
+    //     commonjs: 'react',
+    //     commonjs2: 'react',
+    //     amd: 'react'
+    // }
 };
 
 exports.externals = [externals, nodeExternals()];
 
 
 exports.alias = {
-    'ele-ui': path.resolve(__dirname, '../')
+    root: 'react',
+    commonjs: 'react',
+    commonjs2: 'react',
+    amd: 'react'
 };
-
-exports.react = externals.react;
